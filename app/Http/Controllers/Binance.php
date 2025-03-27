@@ -96,14 +96,14 @@ public function getAllOrder(Request $request){
         }
     }
     public function myTransfer(){
-        try {
+        // try {
 
-            return response()->json($this->api->universalTransferHistory([
-                'timestamp' =>  + $this->syncServerTime()
-            ]));
-        } catch (\Exception $e) {
-            return ['error' => $e->getMessage()];
-        }
+        //     return response()->json($this->api->universalTransferHistory([
+        //         'timestamp' =>  + $this->syncServerTime()
+        //     ]));
+        // } catch (\Exception $e) {
+        //     return ['error' => $e->getMessage()];
+        // }
     }
 
     public function myAccountInfo(){
