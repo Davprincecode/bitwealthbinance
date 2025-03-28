@@ -48,6 +48,27 @@ class Binance extends Controller
     return $adjustedLaptopTime + 1200;
     }
 
+
+    private function checkTime()
+    {
+        $binance = new Spot();
+    $servertime = $binance->time();
+    $serverTime = $servertime['serverTime'];
+
+    $laptopTime = now()->timestamp * 1000;
+    $diff = $serverTime - $laptopTime;
+    $adjustedLaptopTime = $laptopTime + $diff ;
+
+    return response()->json([
+           "binance_time" => $serverTime,
+            "laptop_time" => $laptopTime,
+            "diff" => $diff,
+            "adjusted_time" => $adjustedLaptopTime,
+            "plus_1200" => $adjustedLaptopTime + 1200
+    ], 200);;
+    }
+
+
     public function getAccountInfo()
     {
         try {
