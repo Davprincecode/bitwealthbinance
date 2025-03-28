@@ -11,7 +11,7 @@ Route::get('/', function () {
 
 Route::get('/binance', [Binance::class, 'getAccountInfo']);
 
-Route::get('/binance/time', [Binance::class, 'checkTime']);
+Route::get('/binance/time', [Binance::class, ' checkTime']);
 
 Route::get('/binance/mytrade', [Binance::class, 'myTrade']);
 
