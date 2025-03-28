@@ -65,7 +65,7 @@ class Binance extends Controller
             "diff" => $diff,
             "adjusted_time" => $adjustedLaptopTime,
             "plus_1200" => $adjustedLaptopTime + 1200
-    ], 200);;
+    ], 200);
     }
 
 
