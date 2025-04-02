@@ -187,7 +187,7 @@ public function getAllOrder(Request $request){
     public function exchangePair(){
         try {
 
-            return response()->json($this->api->exchangeInfo()
+            return response()->json($this->api->tickerPrice()
         );
         } catch (\Exception $e) {
             return ['error' => $e->getMessage()];
