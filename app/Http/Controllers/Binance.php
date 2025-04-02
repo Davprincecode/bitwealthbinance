@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Binance\Futures;
 use Binance\Spot;
 use Illuminate\Http\Request;
 
@@ -75,6 +76,8 @@ class Binance extends Controller
             //     'timestamp' =>  + $this->syncServerTime()
             // ]));
             // return $this->api->account();
+
+
 
 
             return response()->json($this->api->account([
@@ -179,6 +182,18 @@ public function getAllOrder(Request $request){
             return ['error' => $e->getMessage()];
         }
     }
+
+
+    public function exchangePair(){
+        try {
+
+            return response()->json($this->api->exchangeInfo()
+        );
+        } catch (\Exception $e) {
+            return ['error' => $e->getMessage()];
+        }
+    }
+
 
     public function myTrade(){
         try {
