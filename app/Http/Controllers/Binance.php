@@ -204,20 +204,33 @@ public function getAllOrder(Request $request){
 
 
 
-    public function myTrade(){
-        try {
+public function myTrade()
+{
+    try {
+        // Get all USDT pairs
+        $pairs = $this->exchangePair()->getData();
 
-                //    $this->api->convertTradeHistory()
-                // $this->api->depositHistory()
-                // $this->api->myTrades()
+        $allTrades = [];
 
-            return response()->json($this->api->myTrades("BNBUSDT",[
-                'timestamp' =>  + $this->syncServerTime()
-            ]));
-        } catch (\Exception $e) {
-            return ['error' => $e->getMessage()];
+        foreach ($pairs as $pair) {
+            $symbol = $pair->symbol;
+
+            // Fetch trades for each symbol
+            $trades = $this->api->myTrades($symbol, [
+                'timestamp' => $this->syncServerTime()
+            ]);
+
+            // Store in result array
+            $allTrades[$symbol] = $trades;
         }
+
+        return response()->json($allTrades);
+
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
     }
+}
+
 
     public function myTradeHistory(){
         try {
