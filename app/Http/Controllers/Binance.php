@@ -262,13 +262,14 @@ public function myTrade()
             $symbol = $pair['symbol'];
 
             // Fetch trades for each symbol
-            $trades = $this->api->myTrades($symbol, [
-                'timestamp' => $this->syncServerTime()
-            ]);
+
+            // $trades = $this->api->myTrades($symbol, [
+            //     'timestamp' => $this->syncServerTime()
+            // ]);
 
             // Store trade data if available
-            if (!empty($trades)) {
-                $allTrades[$symbol] = $trades;
+            if (!empty( $symbol)) {
+                $allTrades[$symbol] =  $symbol;
             }
 
             // **Prevent hitting rate limits** by adding a short delay
