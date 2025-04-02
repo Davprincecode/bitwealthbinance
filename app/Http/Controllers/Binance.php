@@ -209,7 +209,6 @@ public function myTrade()
     try {
         // Get all USDT pairs
         $pairs = $this->exchangePair()->getData();
-
         $allTrades = [];
 
         foreach ($pairs as $pair) {
@@ -220,8 +219,13 @@ public function myTrade()
                 'timestamp' => $this->syncServerTime()
             ]);
 
-            // Store in result array
-            $allTrades[$symbol] = $trades;
+            // Store trade data if available
+            if (!empty($trades)) {
+                $allTrades[$symbol] = $trades;
+            }
+
+            // **Prevent hitting rate limits** by adding a short delay
+            usleep(300000); // 300ms delay
         }
 
         return response()->json($allTrades);
@@ -230,6 +234,7 @@ public function myTrade()
         return response()->json(['error' => $e->getMessage()], 500);
     }
 }
+
 
 
     public function myTradeHistory(){
