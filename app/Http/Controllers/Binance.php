@@ -208,7 +208,7 @@ public function myTrade()
         $params = [
             'timestamp' => $this->syncServerTime(),
             'startTime' => "1668017244486",
-            'endTime' => "1668283966711"
+            'endTime' => "1668017244486"
         ];
 
         $response = $this->api->myTrades("XRPUSDT", $params);
