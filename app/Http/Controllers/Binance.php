@@ -202,15 +202,22 @@ public function getAllOrder(Request $request){
     }
 }
 
-    public function myTrade(){
-        try {
-            return response()->json($this->api->myTrades("XRPUSDT",[
-                'timestamp' =>  + $this->syncServerTime()
-            ]));
-        } catch (\Exception $e) {
-            return ['error' => $e->getMessage()];
-        }
+public function myTrade()
+{
+    try {
+        $params = [
+            'timestamp' => $this->syncServerTime(),
+            'startTime' => "1668017244486",
+            'endTime' => "1668017244486"
+        ];
+
+        $response = $this->api->myTrades("XRPUSDT", $params);
+
+        return response()->json($response);
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
     }
+}
 
     public function myTradeHistory(){
         try {
