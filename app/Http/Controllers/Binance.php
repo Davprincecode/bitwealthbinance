@@ -72,16 +72,8 @@ class Binance extends Controller
     public function getAccountInfo()
     {
         try {
-            // var_dump($this->api->account([
-            //     'timestamp' =>  + $this->syncServerTime()
-            // ]));
-            // return $this->api->account();
-
-
-
-
             return response()->json($this->api->account([
-                'timestamp' =>  + $this->syncServerTime()
+                'timestamp' =>  "1668017244486"
             ]));
         } catch (\Exception $e) {
             return ['error' => $e->getMessage()];
