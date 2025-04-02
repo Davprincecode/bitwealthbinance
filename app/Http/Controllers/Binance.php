@@ -276,7 +276,7 @@ public function myTrade()
         //     usleep(300000); // 300ms delay
         // }
 
-        return response()->json($pairjson);
+        return response()->json($pairjson['symbol']);
 
     } catch (\Exception $e) {
         return response()->json(['error' => $e->getMessage()], 500);
