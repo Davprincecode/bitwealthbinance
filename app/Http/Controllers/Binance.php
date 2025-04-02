@@ -212,7 +212,7 @@ public function myTrade()
         $pairs = $this->exchangePair();
 
         // Decode JSON response to an array
-        $pairs = json_decode($pairs->getContent(), true);
+        $pairjson = json_decode($pairs->getContent(), true);
         // $pairs = array(
         //     array(
         //         "symbol" => "BTCUSDT",
@@ -258,25 +258,25 @@ public function myTrade()
 
         $allTrades = [];
 
-        foreach ($pairs as $pair) {
-            $symbol = $pair['symbol'];
+        // foreach ($pairs as $pair) {
+        //     $symbol = $pair['symbol'];
 
-            // Fetch trades for each symbol
+        //     // Fetch trades for each symbol
 
-            // $trades = $this->api->myTrades($symbol, [
-            //     'timestamp' => $this->syncServerTime()
-            // ]);
+        //     // $trades = $this->api->myTrades($symbol, [
+        //     //     'timestamp' => $this->syncServerTime()
+        //     // ]);
 
-            // Store trade data if available
-            if (!empty( $symbol)) {
-                $allTrades[$symbol] =  $symbol;
-            }
+        //     // Store trade data if available
+        //     if (!empty( $symbol)) {
+        //         $allTrades[$symbol] =  $symbol;
+        //     }
 
-            // **Prevent hitting rate limits** by adding a short delay
-            usleep(300000); // 300ms delay
-        }
+        //     // **Prevent hitting rate limits** by adding a short delay
+        //     usleep(300000); // 300ms delay
+        // }
 
-        return response()->json($allTrades);
+        return response()->json($pairjson);
 
     } catch (\Exception $e) {
         return response()->json(['error' => $e->getMessage()], 500);
