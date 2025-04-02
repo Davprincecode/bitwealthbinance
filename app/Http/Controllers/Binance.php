@@ -258,8 +258,8 @@ public function myTrade()
 
         $allTrades = [];
 
-        // foreach ($pairs as $pair) {
-        //     $symbol = $pair['symbol'];
+        foreach ($pairjson as $pair) {
+            $symbol = $pair['symbol'];
 
         //     // Fetch trades for each symbol
 
@@ -268,15 +268,15 @@ public function myTrade()
         //     // ]);
 
         //     // Store trade data if available
-        //     if (!empty( $symbol)) {
-        //         $allTrades[$symbol] =  $symbol;
-        //     }
+            if (!empty( $symbol)) {
+                $allTrades =  $symbol;
+            }
 
         //     // **Prevent hitting rate limits** by adding a short delay
         //     usleep(300000); // 300ms delay
-        // }
+        }
 
-        return response()->json($pairjson);
+        return response()->json($allTrades);
 
     } catch (\Exception $e) {
         return response()->json(['error' => $e->getMessage()], 500);
