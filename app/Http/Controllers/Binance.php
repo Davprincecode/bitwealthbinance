@@ -184,15 +184,24 @@ public function getAllOrder(Request $request){
     }
 
 
-    public function exchangePair(){
-        try {
+    public function exchangePair()
+{
+    try {
+        // Fetch all ticker prices
+        $response = $this->api->tickerPrice();
 
-            return response()->json($this->api->tickerPrice()
-        );
-        } catch (\Exception $e) {
-            return ['error' => $e->getMessage()];
-        }
+        // Filter pairs ending with 'USDT'
+        $usdtPairs = collect($response)->filter(function ($pair) {
+            return str_ends_with($pair['symbol'], 'USDT');
+        })->values();
+
+        return response()->json($usdtPairs);
+
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
     }
+}
+
 
 
     public function myTrade(){
