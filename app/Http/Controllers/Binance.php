@@ -202,88 +202,15 @@ public function getAllOrder(Request $request){
     }
 }
 
-
-
-public function myTrade()
-{
-    try {
-        // Get all USDT pairs
-        // Fetch all USDT trading pairs
-        $pairs = $this->exchangePair();
-
-        // Decode JSON response to an array
-        $pairjson = json_decode($pairs->getContent(), true);
-        // $pairs = array(
-        //     array(
-        //         "symbol" => "BTCUSDT",
-        //         "price" => "84288.12000000"
-        //     ),
-        //     array(
-        //         "symbol" => "ETHUSDT",
-        //         "price" => "1862.00000000"
-        //     ),
-        //     array(
-        //         "symbol" => "BNBUSDT",
-        //         "price" => "597.02000000"
-        //     ),
-        //     array(
-        //         "symbol" => "BCCUSDT",
-        //         "price" => "0.00000000"
-        //     ),
-        //     array(
-        //         "symbol" => "NEOUSDT",
-        //         "price" => "5.42000000"
-        //     ),
-        //     array(
-        //         "symbol" => "LTCUSDT",
-        //         "price" => "81.86000000"
-        //     ),
-        //     array(
-        //         "symbol" => "QTUMUSDT",
-        //         "price" => "1.92800000"
-        //     ),
-        //     array(
-        //         "symbol" => "ADAUSDT",
-        //         "price" => "0.66720000"
-        //     ),
-        //     array(
-        //         "symbol" => "XRPUSDT",
-        //         "price" => "2.08330000"
-        //     ),
-        //     array(
-        //         "symbol" => "EOSUSDT",
-        //         "price" => "0.80000000"
-        //     )
-        // );
-
-        $allTrades = [];
-
-        foreach ($pairjson as $pair) {
-            $symbol = $pair['symbol'];
-
-        //     // Fetch trades for each symbol
-
-        //     // $trades = $this->api->myTrades($symbol, [
-        //     //     'timestamp' => $this->syncServerTime()
-        //     // ]);
-
-        //     // Store trade data if available
-            if (!empty( $symbol)) {
-                $allTrades =  $symbol;
-            }
-
-        //     // **Prevent hitting rate limits** by adding a short delay
-        //     usleep(300000); // 300ms delay
+    public function myTrade(){
+        try {
+            return response()->json($this->api->myTrades("XRPUSDT",[
+                'timestamp' =>  + $this->syncServerTime()
+            ]));
+        } catch (\Exception $e) {
+            return ['error' => $e->getMessage()];
         }
-
-        return response()->json($allTrades);
-
-    } catch (\Exception $e) {
-        return response()->json(['error' => $e->getMessage()], 500);
     }
-}
-
-
 
     public function myTradeHistory(){
         try {
