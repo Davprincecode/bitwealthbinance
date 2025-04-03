@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Binance;
+use App\Http\Controllers\BinanceFuture;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BinanceTest;
 
@@ -11,6 +12,12 @@ use App\Http\Controllers\BinanceTest;
 Route::get('/Binance/tradespot/{startTime}/{endTime}/{firstSymbol}/{secondSymbol}', [Binance::class, 'myTrade']);
 // ============= binane test below start =================
 
+
+// =============================== binance future ======
+Route::get('/binance/open-orders', [BinanceFuture::class, 'openOrders']);
+Route::get('/binance/positions', [BinanceFuture::class, 'positions']);
+Route::get('/binance/position-history', [BinanceFuture::class, 'positionHistory']);
+// ============================= binance future end =============
 
 Route::get('/Binance', [BinanceTest::class, 'getAccountInfo']);
 
