@@ -19,27 +19,27 @@ Route::get('/binance/positions', [BinanceFuture::class, 'positions']);
 Route::get('/binance/position-history', [BinanceFuture::class, 'positionHistory']);
 // ============================= binance future end =============
 
-Route::get('/Binance', [BinanceTest::class, 'getAccountInfo']);
+Route::get('/binance', [BinanceTest::class, 'getAccountInfo']);
 
-Route::get('/Binance/time', [BinanceTest::class, ' checkTime']);
+Route::get('/binance/time', [BinanceTest::class, ' checkTime']);
 
-Route::get('/Binance/exchangeinfo', [BinanceTest::class, 'exchangePair']);
-Route::get('/Binance/mytrade', [BinanceTest::class, 'myTrade']);
+Route::get('/binance/exchangeinfo', [BinanceTest::class, 'exchangePair']);
+Route::get('/binance/mytrade', [BinanceTest::class, 'myTrade']);
 
-Route::get('/Binance/tradehistory', [BinanceTest::class, 'myTradeHistory']);
+Route::get('/binance/tradehistory', [BinanceTest::class, 'myTradeHistory']);
 
-Route::get('/Binance/withdraw', [BinanceTest::class, 'myWithdraw']);
+Route::get('/binance/withdraw', [BinanceTest::class, 'myWithdraw']);
 
-Route::get('/Binance/deposit', [BinanceTest::class, 'myDeposit']);
-Route::get('/Binance/acctinfo', [BinanceTest::class, 'myAccountInfo']);
+Route::get('/binance/deposit', [BinanceTest::class, 'myDeposit']);
+Route::get('/binance/acctinfo', [BinanceTest::class, 'myAccountInfo']);
 
-Route::get('/Binance/spotbalance', [BinanceTest::class, 'myBalanceSpot']);
+Route::get('/binance/spotbalance', [BinanceTest::class, 'myBalanceSpot']);
 
-Route::get('/Binance/futurebalance', [BinanceTest::class, 'myBalanceFutures']);
-Route::get('/Binance/balance', [BinanceTest::class, 'myBalance']);
-Route::get('/Binance/asset', [BinanceTest::class, 'userAsset']);
+Route::get('/binance/futurebalance', [BinanceTest::class, 'myBalanceFutures']);
+Route::get('/binance/balance', [BinanceTest::class, 'myBalance']);
+Route::get('/binance/asset', [BinanceTest::class, 'userAsset']);
 
-Route::get('/Binance/allorder', [BinanceTest::class, 'getAllOrder']);
+Route::get('/binance/allorder', [BinanceTest::class, 'getAllOrder']);
 
 
 
