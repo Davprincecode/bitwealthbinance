@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Binance;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BinanceTest;
 
@@ -7,9 +8,9 @@ use App\Http\Controllers\BinanceTest;
 // ===================== binance start ===========
 
 // ============ binance end ==============
-
-
+Route::get('/Binance/tradespot/{startTime}/{endTime}/{firstSymbol}/{secondSymbol}', [Binance::class, 'myTrade']);
 // ============= binane test below start =================
+
 
 Route::get('/Binance', [BinanceTest::class, 'getAccountInfo']);
 

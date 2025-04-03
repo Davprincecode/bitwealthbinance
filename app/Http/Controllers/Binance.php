@@ -75,18 +75,25 @@ class Binance extends Controller
 
 
 
-public function myTrade()
+public function myTrade($startTime, $endTime, $firstSymbol, $secondSymbol)
 {
     try {
         $params = [
             'timestamp' => $this->syncServerTime(),
-            'startTime' => "1668017244486",
-            'endTime' => "1668017244486"
+            'startTime' => $startTime,
+            'endTime' => $endTime
         ];
+        $symbol = $firstSymbol.$secondSymbol;
+        $response = $this->api->myTrades($symbol, $params);
+        $balance = $this->getBalanceAtTime($startTime, $firstSymbol, $secondSymbol);
 
-        $response = $this->api->myTrades("XRPUSDT", $params);
-
-        return response()->json($response);
+        return response()->json([
+               "status" => true,
+               "data" => [
+                "trade" => $response,
+                "balance" => $balance
+               ]
+        ], 200);
     } catch (\Exception $e) {
         return response()->json(['error' => $e->getMessage()], 500);
     }
@@ -95,13 +102,13 @@ public function myTrade()
 
 // =================================== get user balance================================
 
-public function getBalanceAtTime($timestamp)
+public function getBalanceAtTime($timestamp, $firstSymbol, $secondSymbol)
 {
     $previousDayTimestamp = $this->getPreviousDayTimestamp($timestamp);
 
     // 1️⃣ Get account snapshot from the previous day
     $snapshot = $this->getAccountSnapshot($previousDayTimestamp);
-    $balances = $this->extractBalances($snapshot, ['USDT', 'XRP']);
+    $balances = $this->extractBalances($snapshot, [$secondSymbol, $firstSymbol]);
 
     // 2️⃣ Fetch deposits & withdrawals for the target day
     $deposits = $this->getDeposits($previousDayTimestamp, $timestamp);
