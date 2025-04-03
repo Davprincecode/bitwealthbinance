@@ -1,48 +1,49 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Binance;
-
-Route::get('/', function () {
-    return "hello world";
-});
+use App\Http\Controllers\BinanceTest;
 
 
+// ===================== binance start ===========
 
-Route::get('/binance', [Binance::class, 'getAccountInfo']);
-
-Route::get('/binance/time', [Binance::class, ' checkTime']);
-
-Route::get('/binance/exchangeinfo', [Binance::class, 'exchangePair']);
-Route::get('/binance/mytrade', [Binance::class, 'myTrade']);
-
-Route::get('/binance/tradehistory', [Binance::class, 'myTradeHistory']);
-
-Route::get('/binance/withdraw', [Binance::class, 'myWithdraw']);
-
-Route::get('/binance/deposit', [Binance::class, 'myDeposit']);
-Route::get('/binance/acctinfo', [Binance::class, 'myAccountInfo']);
-
-Route::get('/binance/spotbalance', [Binance::class, 'myBalanceSpot']);
-
-Route::get('/binance/futurebalance', [Binance::class, 'myBalanceFutures']);
-Route::get('/binance/balance', [Binance::class, 'myBalance']);
-Route::get('/binance/asset', [Binance::class, 'userAsset']);
+// ============ binance end ==============
 
 
-Route::get('/binance/allorder', [Binance::class, 'getAllOrder']);
+// ============= binane test below start =================
 
+Route::get('/Binance', [BinanceTest::class, 'getAccountInfo']);
 
+Route::get('/Binance/time', [BinanceTest::class, ' checkTime']);
 
+Route::get('/Binance/exchangeinfo', [BinanceTest::class, 'exchangePair']);
+Route::get('/Binance/mytrade', [BinanceTest::class, 'myTrade']);
+
+Route::get('/Binance/tradehistory', [BinanceTest::class, 'myTradeHistory']);
+
+Route::get('/Binance/withdraw', [BinanceTest::class, 'myWithdraw']);
+
+Route::get('/Binance/deposit', [BinanceTest::class, 'myDeposit']);
+Route::get('/Binance/acctinfo', [BinanceTest::class, 'myAccountInfo']);
+
+Route::get('/Binance/spotbalance', [BinanceTest::class, 'myBalanceSpot']);
+
+Route::get('/Binance/futurebalance', [BinanceTest::class, 'myBalanceFutures']);
+Route::get('/Binance/balance', [BinanceTest::class, 'myBalance']);
+Route::get('/Binance/asset', [BinanceTest::class, 'userAsset']);
+
+Route::get('/Binance/allorder', [BinanceTest::class, 'getAllOrder']);
 
 
 
 
 
-// Route::get('/binance/time', function () {
-//     $binance = new Binance\Spot();
 
-//     $servertime = $binance->time();
+
+
+// Route::get('/Binance/time', function () {
+//     $BinanceTest = new BinanceTest\Spot();
+
+//     $servertime = $BinanceTest->time();
 //     // var_dump($servertime);
 //     $serverTime = $servertime['serverTime'];
 
@@ -51,7 +52,7 @@ Route::get('/binance/allorder', [Binance::class, 'getAllOrder']);
 //     $adjustedLaptopTime = $laptopTime + $diff;
 
 //     return response()->json([
-//        "server_time" =>  $binance->time(),
+//        "server_time" =>  $BinanceTest->time(),
 //        "laptop_time" => $laptopTime,
 //        "diff" => $diff,
 //        "adjusted_time" => $adjustedLaptopTime + 1200
@@ -59,10 +60,10 @@ Route::get('/binance/allorder', [Binance::class, 'getAllOrder']);
 
 // });
 
-// Route::get('/binance/account', function () {
-//     $binance = new Binance\Spot([
+// Route::get('/Binance/account', function () {
+//     $BinanceTest = new BinanceTest\Spot([
 //         'key' => 'RXf8O7WU63cr4E6BROxwMpiZrAJYrbzoJW3selbxScEZ02xqfiWBcUFro7IwCPyQ',
 //         'secret' => 'ylfoM9jEs5pKNMv8JuXOMSw5WyjoU02Kyi42XynJDYc7t4IidIsd9DSZGtXxtwOS'
 //     ]);
-//     return response()->json($binance->account());
+//     return response()->json($BinanceTest->account());
 // });

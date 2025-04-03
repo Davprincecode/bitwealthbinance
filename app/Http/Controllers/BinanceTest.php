@@ -6,7 +6,7 @@ use Binance\Futures;
 use Binance\Spot;
 use Illuminate\Http\Request;
 
-class Binance extends Controller
+class BinanceTest extends Controller
 {
     //
     protected $api;
@@ -49,8 +49,47 @@ class Binance extends Controller
     return $adjustedLaptopTime + 1200;
     }
 
-    // 1668017244486
 
+    private function checkTime()
+    {
+        $binance = new Spot();
+    $servertime = $binance->time();
+    $serverTime = $servertime['serverTime'];
+
+    $laptopTime = now()->timestamp * 1000;
+    $diff = $serverTime - $laptopTime;
+    $adjustedLaptopTime = $laptopTime + $diff ;
+
+    return response()->json([
+           "binance_time" => $serverTime,
+            "laptop_time" => $laptopTime,
+            "diff" => $diff,
+            "adjusted_time" => $adjustedLaptopTime
+    ], 200);
+    }
+
+
+    public function getAccountInfo()
+    {
+        try {
+            return response()->json($this->api->account([
+                'timestamp' =>  "1668017244486"
+            ]));
+        } catch (\Exception $e) {
+            return ['error' => $e->getMessage()];
+        }
+    }
+
+public function getAllOrder(Request $request){
+    try {
+
+        return response()->json($this->api->allOrders("BNBUSDT",[
+            'timestamp' =>  + $this->syncServerTime()
+        ]));
+    } catch (\Exception $e) {
+        return ['error' => $e->getMessage()];
+    }
+}
     public function myDeposit(){
         try {
 
@@ -61,7 +100,6 @@ class Binance extends Controller
             return ['error' => $e->getMessage()];
         }
     }
-
     public function myWithdraw(){
         try {
 
@@ -72,19 +110,103 @@ class Binance extends Controller
             return ['error' => $e->getMessage()];
         }
     }
+    public function myTransfer(){
+        // try {
+
+        //     return response()->json($this->api->universalTransferHistory([
+        //         'timestamp' =>  + $this->syncServerTime()
+        //     ]));
+        // } catch (\Exception $e) {
+        //     return ['error' => $e->getMessage()];
+        // }
+    }
+
+    public function myAccountInfo(){
+        try {
+
+            return response()->json($this->api->accountInfo([
+                'timestamp' =>  + $this->syncServerTime()
+            ]));
+        } catch (\Exception $e) {
+            return ['error' => $e->getMessage()];
+        }
+    }
 
 
+    public function myBalanceSpot(){
+        try {
+
+            return response()->json($this->api->accountSnapshot("SPOT", [
+                'timestamp' =>  $this->syncServerTime()
+            ]));
+        } catch (\Exception $e) {
+            return ['error' => $e->getMessage()];
+        }
+    }
+    public function myBalanceFutures(){
+        try {
+
+            return response()->json($this->api->accountSnapshot("FUTURES", [
+                'timestamp' =>  $this->syncServerTime()
+            ]));
+        } catch (\Exception $e) {
+            return ['error' => $e->getMessage()];
+        }
+    }
+    public function myBalance(){
+        try {
+
+            return response()->json($this->api->queryUserWalletBalance([
+                'timestamp' =>  $this->syncServerTime()
+            ]));
+        } catch (\Exception $e) {
+            return ['error' => $e->getMessage()];
+        }
+    }
+
+    public function userAsset(){
+        try {
+
+            return response()->json($this->api->userAsset([
+                'timestamp' =>  $this->syncServerTime()
+            ]));
+        } catch (\Exception $e) {
+            return ['error' => $e->getMessage()];
+        }
+    }
+
+
+    public function exchangePair()
+{
+    try {
+        // Fetch all ticker prices
+        $response = $this->api->tickerPrice();
+
+        // Filter pairs ending with 'USDT'
+        $usdtPairs = collect($response)->filter(function ($pair) {
+            return str_ends_with($pair['symbol'], 'USDT');
+        })->values();
+
+        return response()->json($usdtPairs);
+
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
+}
 
 public function myTrade()
 {
+
+    
+            // 'startTime' => "1668017244486",
+            // 'endTime' => "1668017244486"
+
     try {
         $params = [
-            'timestamp' => $this->syncServerTime(),
-            'startTime' => "1668017244486",
-            'endTime' => "1668017244486"
+            'timestamp' => $this->syncServerTime()
         ];
 
-        $response = $this->api->myTrades("XRPUSDT", $params);
+        $response = $this->api->myTrades("SUIUSDT", $params);
 
         return response()->json($response);
     } catch (\Exception $e) {
@@ -92,8 +214,30 @@ public function myTrade()
     }
 }
 
+    public function myTradeHistory(){
+        try {
 
-// =================================== get user balance================================
+                //    $this->api->payTradeHistory()
+                // /sapi/v1/pay/transactions
+
+                //    $this->api->c2cTradeHistory()
+                // /sapi/v1/c2c/orderMatch/listUserOrderHistory
+
+                // $this->api->nftTransactionHistory
+                // $this->api->historicalTrades()
+
+                // $this->api->futuresAccount();
+
+            return response()->json($this->api->payTradeHistory([
+                'timestamp' =>  + $this->syncServerTime()
+            ]));
+        } catch (\Exception $e) {
+            return ['error' => $e->getMessage()];
+        }
+    }
+
+// ===================================================================
+
 
 public function getBalanceAtTime($timestamp)
 {
