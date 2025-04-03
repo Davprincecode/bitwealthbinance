@@ -233,8 +233,90 @@ public function myTrade()
         }
     }
 
+// ===================================================================
 
 
+public function getBalanceAtTime($timestamp)
+{
+    $previousDayTimestamp = $this->getPreviousDayTimestamp($timestamp);
+
+    // 1️⃣ Get account snapshot from the previous day
+    $snapshot = $this->getAccountSnapshot($previousDayTimestamp);
+    $balances = $this->extractBalances($snapshot, ['USDT', 'XRP']);
+
+    // 2️⃣ Fetch deposits & withdrawals for the target day
+    $deposits = $this->getDeposits($previousDayTimestamp, $timestamp);
+    $withdrawals = $this->getWithdrawals($previousDayTimestamp, $timestamp);
+
+    // 3️⃣ Apply transactions to update balances
+    $finalBalance = $this->calculateBalance($balances, $deposits, $withdrawals);
+
+    return $finalBalance;
+}
+
+private function getPreviousDayTimestamp($timestamp)
+{
+    return strtotime('-1 day', $timestamp / 1000) * 1000;
+}
+
+private function getAccountSnapshot($timestamp)
+{
+    $response = $this->api->accountSnapshot("SPOT", [
+        'timestamp' =>  $timestamp
+    ]);
+    return $response->json();
+}
+
+private function extractBalances($snapshot, $assets)
+{
+    $balances = [];
+
+    foreach ($snapshot['snapshotVos'] ?? [] as $entry) {
+        foreach ($entry['data']['balances'] as $balance) {
+            if (in_array($balance['asset'], $assets)) {
+                $balances[$balance['asset']] = (float) $balance['free'];
+            }
+        }
+    }
+
+    return $balances;
+}
+
+private function getDeposits($startTime, $endTime)
+{
+    $response = $this->api->depositHistory([
+        'startTime' => $startTime,
+        'endTime' => $endTime
+    ]);
+
+    return $response->json();
+}
+
+private function getWithdrawals($startTime, $endTime)
+{
+    $response = $this->api->withdrawHistory([
+        'startTime' => $startTime,
+        'endTime' => $endTime
+    ]);
+    return $response->json();
+}
+
+private function calculateBalance($balances, $deposits, $withdrawals)
+{
+    foreach ($deposits as $deposit) {
+        if ($deposit['status'] == 1) {
+            $balances[$deposit['coin']] += (float) $deposit['amount'];
+        }
+    }
+
+    foreach ($withdrawals as $withdrawal) {
+        if ($withdrawal['status'] == 1) {
+            $balances[$withdrawal['coin']] -= ((float) $withdrawal['amount'] + (float) $withdrawal['transactionFee']);
+        }
+    }
+
+    return $balances;
+}
 
 
 
