@@ -20,9 +20,13 @@ class BinanceFuturesService
         // https://fapi.binance.com
 
 
-        $this->apiKey = 'v83VOrFC6b1yq3tbdoGRMj7l0bYyGnb589z6MhA6L3z4nM9ejJGTCO2sfHhYK7qD';
-        $this->apiSecret = '0jThJwNQBIu35cJtWAHulsTWrpD9PunGdAEi53nvBIxqd746eojx9EanBex1OFgO';
-        $this->baseUrl = 'fapi.binance.com';
+        // $this->apiKey = 'v83VOrFC6b1yq3tbdoGRMj7l0bYyGnb589z6MhA6L3z4nM9ejJGTCO2sfHhYK7qD';
+        // $this->apiSecret = '0jThJwNQBIu35cJtWAHulsTWrpD9PunGdAEi53nvBIxqd746eojx9EanBex1OFgO';
+        // $this->baseUrl = 'fapi.binance.com';
+
+        $this->apiKey = '1c9c2e1837b75f91ee5bbd0b3d15ef5571868946644c8a0da5ed2e8d461fbb1c';
+        $this->apiSecret = '38dc061581dfb14a693b61eaa4d637e1de0c98129635f2c672b5f993a6ec3d2b';
+        $this->baseUrl = "https://testnet.binancefuture.com";
     }
 
     /**
@@ -62,25 +66,6 @@ class BinanceFuturesService
         return $this->makeRequest('get', '/fapi/v1/openOrders', ['symbol' => $symbol], true);
     }
 
-    /**
-     * Place an Order
-     */
-    public function placeOrder($symbol, $side, $quantity, $type = "MARKET", $price = null)
-    {
-        $params = [
-            'symbol' => $symbol,
-            'side' => $side, // BUY or SELL
-            'type' => $type, // MARKET, LIMIT, STOP_MARKET, etc.
-            'quantity' => $quantity,
-        ];
-
-        if ($price && in_array($type, ['LIMIT', 'STOP_LIMIT'])) {
-            $params['price'] = $price;
-            $params['timeInForce'] = 'GTC'; // Good Till Canceled
-        }
-
-        return $this->makeRequest('post', '/fapi/v1/order', $params, true);
-    }
 
     /**
      * Get Open Positions
