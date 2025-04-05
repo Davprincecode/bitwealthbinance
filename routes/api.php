@@ -9,7 +9,7 @@ use App\Http\Controllers\BinanceTest;
 // ===================== binance start ===========
 
 // ============ binance end ==============
-Route::get('/Binance/tradespot/{startTime}/{endTime}/{firstSymbol}/{secondSymbol}', [Binance::class, 'myTrade']);
+Route::get('/binance/tradespot/{startTime}/{endTime}/{firstSymbol}/{secondSymbol}', [Binance::class, 'myTrade']);
 // ============= binane test below start =================
 
 
