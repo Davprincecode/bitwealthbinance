@@ -16,28 +16,10 @@ class BinanceFuture extends Controller
 
     public function openOrders(Request $request)
     {
-        $symbol = $request->get('symbol', 'BTCUSDT');
+        $symbol = $request->get('symbol', 'SNTUSDT');
         return response()->json($this->binanceService->getOpenOrders($symbol));
     }
 
-    public function placeOrder(Request $request)
-    {
-        $request->validate([
-            'symbol' => 'required|string',
-            'side' => 'required|string',
-            'quantity' => 'required|numeric',
-            'type' => 'nullable|string',
-            'price' => 'nullable|numeric',
-        ]);
-
-        return response()->json($this->binanceService->placeOrder(
-            $request->symbol,
-            $request->side,
-            $request->quantity,
-            $request->type ?? 'MARKET',
-            $request->price
-        ));
-    }
 
     public function positions()
     {
@@ -46,7 +28,7 @@ class BinanceFuture extends Controller
 
     public function positionHistory(Request $request)
     {
-        $symbol = $request->get('symbol', 'BTCUSDT');
+        $symbol = $request->get('symbol', 'SNTUSDT');
         return response()->json($this->binanceService->getPositionHistory($symbol));
     }
 }
