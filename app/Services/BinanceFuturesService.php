@@ -66,8 +66,7 @@ class BinanceFuturesService
      */
     public function getOpenOrders($symbol)
     {
-        // ['symbol' => $symbol],
-        return $this->makeRequest('get', '/fapi/v1/openOrders',  true);
+        return $this->makeRequest('get', '/fapi/v1/openOrders',  ['symbol' => $symbol], true);
     }
 
 
