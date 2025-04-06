@@ -14,9 +14,9 @@ class BinanceFuture extends Controller
         $this->binanceService = $binanceService;
     }
 
-    public function openOrders(Request $request)
+    public function openOrders($symbol)
     {
-        $symbol = $request->get('symbol', 'SNTUSDT');
+       
         return response()->json($this->binanceService->getOpenOrders($symbol));
     }
 

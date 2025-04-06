@@ -14,7 +14,7 @@ Route::get('/binance/tradespot/{startTime}/{endTime}/{firstSymbol}/{secondSymbol
 
 
 // =============================== binance future ======
-Route::get('/binance/open-orders', [BinanceFuture::class, 'openOrders']);
+Route::get('/binance/open-orders/{symbol}', [BinanceFuture::class, 'openOrders']);
 Route::get('/binance/positions', [BinanceFuture::class, 'positions']);
 Route::get('/binance/position-history', [BinanceFuture::class, 'positionHistory']);
 // ============================= binance future end =============
