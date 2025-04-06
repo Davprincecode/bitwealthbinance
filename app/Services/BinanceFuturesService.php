@@ -22,14 +22,14 @@ class BinanceFuturesService
 
         // $this->apiKey = 'v83VOrFC6b1yq3tbdoGRMj7l0bYyGnb589z6MhA6L3z4nM9ejJGTCO2sfHhYK7qD';
         // $this->apiSecret = '0jThJwNQBIu35cJtWAHulsTWrpD9PunGdAEi53nvBIxqd746eojx9EanBex1OFgO';
-        $this->baseUrl = 'fapi.binance.com';
+        // $this->baseUrl = 'fapi.binance.com';
 
-        $this->apiKey = 'P3jlSw2QSps6dSK52rEQxXbIiSnI6SS5d09xGpupvfYLVGdFsNAjLP8JDQ4qGgNC';
-        $this->apiSecret = 'xyly5WesyjRdVZWw2f8nTZnHgViFYiuoWDoQk9iKnc9dOVo3mxACzJj9Q2358rOM';
+        // $this->apiKey = 'P3jlSw2QSps6dSK52rEQxXbIiSnI6SS5d09xGpupvfYLVGdFsNAjLP8JDQ4qGgNC';
+        // $this->apiSecret = 'xyly5WesyjRdVZWw2f8nTZnHgViFYiuoWDoQk9iKnc9dOVo3mxACzJj9Q2358rOM';
 
-        // $this->apiKey = '1c9c2e1837b75f91ee5bbd0b3d15ef5571868946644c8a0da5ed2e8d461fbb1c';
-        // $this->apiSecret = '38dc061581dfb14a693b61eaa4d637e1de0c98129635f2c672b5f993a6ec3d2b';
-        // $this->baseUrl = "https://testnet.binancefuture.com";
+        $this->apiKey = '1c9c2e1837b75f91ee5bbd0b3d15ef5571868946644c8a0da5ed2e8d461fbb1c';
+        $this->apiSecret = '38dc061581dfb14a693b61eaa4d637e1de0c98129635f2c672b5f993a6ec3d2b';
+        $this->baseUrl = "https://testnet.binancefuture.com";
     }
 
     /**
@@ -66,7 +66,8 @@ class BinanceFuturesService
      */
     public function getOpenOrders($symbol)
     {
-        return $this->makeRequest('get', '/fapi/v1/openOrders', ['symbol' => $symbol], true);
+        // ['symbol' => $symbol],
+        return $this->makeRequest('get', '/fapi/v1/openOrders',  true);
     }
 
 
