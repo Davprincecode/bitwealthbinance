@@ -33,4 +33,9 @@ class BinanceFuture extends Controller
     {
         return response()->json($this->binanceService->getAllOrder($symbol));
     }
+
+    public function tradeHistory($symbol)
+    {
+        return response()->json($this->binanceService->getTradeHistory($symbol));
+    }
 }

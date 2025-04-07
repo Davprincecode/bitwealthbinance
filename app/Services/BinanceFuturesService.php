@@ -89,4 +89,8 @@ class BinanceFuturesService
     {
         return $this->makeRequest('get', '/fapi/v1/allOrders', ['symbol' => $symbol], true);
     }
+    public function getTradeHistory($symbol)
+    {
+        return $this->makeRequest('get', '/fapi/v1/userTrades', ['symbol' => $symbol], true);
+    }
 }

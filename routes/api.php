@@ -18,6 +18,7 @@ Route::get('/binance/open-orders/{symbol}', [BinanceFuture::class, 'openOrders']
 Route::get('/binance/positions', [BinanceFuture::class, 'positions']);
 Route::get('/binance/position-history/{symbol}', [BinanceFuture::class, 'positionHistory']);
 Route::get('/binance/all-order/{symbol}', [BinanceFuture::class, 'positionAllOrder']);
+Route::get('/binance/trade-history/{symbol}', [BinanceFuture::class, 'tradeHistory']);
 // ============================= binance future end =============
 
 Route::get('/binance', [BinanceTest::class, 'getAccountInfo']);
