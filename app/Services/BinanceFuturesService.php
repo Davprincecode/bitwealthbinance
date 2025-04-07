@@ -75,7 +75,7 @@ class BinanceFuturesService
      */
     public function getPositions()
     {
-        return $this->makeRequest('get', '/fapi/v3/positionRisk', [], true);
+        return $this->makeRequest('get', '/fapi/v2/positionRisk', [], true);
     }
 
     /**
