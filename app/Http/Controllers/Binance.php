@@ -184,12 +184,16 @@ public function getDeposits($startTime, $endTime)
 
 public function getWithdrawals($startTime, $endTime)
 {
-    $response = $this->api->withdrawHistory([
-        'timestamp' =>  $this->syncServerTime(),
-        'startTime' => $startTime,
-        'endTime' => $endTime
-    ]);
-    return $response->json();
+    try {
+
+        return response()->json($this->api->withdrawHistory([
+            'timestamp' =>  + $this->syncServerTime(),
+            'startTime' => $startTime,
+            'endTime' => $endTime
+        ]));
+    } catch (\Exception $e) {
+        return ['error' => $e->getMessage()];
+    }
 }
 
 private function calculateBalance($balances, $deposits, $withdrawals)
