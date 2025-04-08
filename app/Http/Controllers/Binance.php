@@ -117,8 +117,8 @@ public function getBalanceAtTime($timestamp, $firstSymbol, $secondSymbol)
 
     // 2️⃣ Fetch deposits & withdrawals for the target day
 
-    $deposits = $this->getDeposits($previousDayTimestamp, $timestamp);
-    $withdrawals = $this->getWithdrawals($previousDayTimestamp, $timestamp);
+    // $deposits = $this->getDeposits($previousDayTimestamp, $timestamp);
+    // $withdrawals = $this->getWithdrawals($previousDayTimestamp, $timestamp);
 
     // 3️⃣ Apply transactions to update balances
 
