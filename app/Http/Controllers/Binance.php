@@ -335,7 +335,7 @@ public function extractBalances(Request $request)
     ]
 ];
 
-$assets = ["XRP"];
+$assets = ["XEP"];
 
     foreach ($snapshot['snapshotVos'] ?? [] as $entry) {
         foreach ($entry['data']['balances'] as $balance) {
