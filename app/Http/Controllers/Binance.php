@@ -144,11 +144,9 @@ public function getAccountSnapshot($timestamp)
 {
 
     try {
-        $response = $this->api->accountSnapshot("SPOT", [
+        return response()->json($this->api->accountSnapshot("SPOT", [
             'timestamp' =>  $this->syncServerTime()
-        ]);
-
-        return  $response->json();
+        ]));
 
     } catch (\Exception $e) {
         return ['error' => $e->getMessage()];
