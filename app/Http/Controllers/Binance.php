@@ -112,7 +112,8 @@ public function getBalanceAtTime($timestamp, $firstSymbol, $secondSymbol)
 
 
     $snapshot = $this->getAccountSnapshot($previousDayTimestamp);
-    $balances = $this->extractBalances($snapshot, [$secondSymbol, $firstSymbol]);
+
+    // $balances = $this->extractBalances($snapshot, [$secondSymbol, $firstSymbol]);
 
     // 2️⃣ Fetch deposits & withdrawals for the target day
 
