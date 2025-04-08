@@ -160,8 +160,181 @@ private function extractBalances(Request $request)
 {
     $balances = [];
 
-   $snapshot = $request->snapshot;
-   $assets = $request->assets;
+   $snapshot = [
+    "code" => 200,
+    "msg" =>  "",
+    "snapshotVos" => [
+        [
+            "type" => "spot",
+            "updateTime" => 1743551999000,
+            "data" => [
+                "totalAssetOfBtc" => "0.00026119",
+                "balances" => [
+                    [
+                        "asset" => "NOT",
+                        "free" => "1305.42",
+                        "locked" => "0"
+                    ],
+                    [
+                        "asset" => "USDT",
+                        "free" => "0.00739615",
+                        "locked" => "0"
+                    ],
+                    [
+                        "asset" => "XRP",
+                        "free" => "8.83879665",
+                        "locked" => "0"
+                    ]
+                ]
+            ]
+        ],
+        [
+            "type" => "spot",
+            "updateTime" => 1743638399000,
+            "data" => [
+                "totalAssetOfBtc" => "0.00024257",
+                "balances" => [
+                    [
+                        "asset" => "NOT",
+                        "free" => "857.49",
+                        "locked" => "0"
+                    ],
+                    [
+                        "asset" => "USDT",
+                        "free" => "0.00991188",
+                        "locked" => "0"
+                    ],
+                    [
+                        "asset" => "XRP",
+                        "free" => "8.83879665",
+                        "locked" => "0"
+                    ]
+                ]
+            ]
+        ],
+        [
+            "type" => "spot",
+            "updateTime" => 1743724799000,
+            "data" => [
+                "totalAssetOfBtc" => "0.00023656",
+                "balances" => [
+                    [
+                        "asset" => "NOT",
+                        "free" => "857.49",
+                        "locked" => "0"
+                    ],
+                    [
+                        "asset" => "USDT",
+                        "free" => "0.00991188",
+                        "locked" => "0"
+                    ],
+                    [
+                        "asset" => "XRP",
+                        "free" => "8.83879665",
+                        "locked" => "0"
+                    ]
+                ]
+            ]
+        ],
+        [
+            "type" => "spot",
+            "updateTime" => 1743811199000,
+            "data" => [
+                "totalAssetOfBtc" => "0.00024168",
+                "balances" => [
+                    [
+                        "asset" => "NOT",
+                        "free" => "857.49",
+                        "locked" => "0"
+                    ],
+                    [
+                        "asset" => "USDT",
+                        "free" => "0.00991188",
+                        "locked" => "0"
+                    ],
+                    [
+                        "asset" => "XRP",
+                        "free" => "8.83879665",
+                        "locked" => "0"
+                    ]
+                ]
+            ]
+        ],
+        [
+            "type" => "spot",
+            "updateTime" => 1743897599000,
+            "data" => [
+                "totalAssetOfBtc" => "0.00024416",
+                "balances" => [
+                    [
+                        "asset" => "NOT",
+                        "free" => "857.49",
+                        "locked" => "0"
+                    ],
+                    [
+                        "asset" => "USDT",
+                        "free" => "0.00991188",
+                        "locked" => "0"
+                    ],
+                    [
+                        "asset" => "XRP",
+                        "free" => "8.83879665",
+                        "locked" => "0"
+                    ]
+                ]
+            ]
+        ],
+        [
+            "type" => "spot",
+            "updateTime" => 1743983999000,
+            "data" => [
+                "totalAssetOfBtc" => "0.000234",
+                "balances" => [
+                    [
+                        "asset" => "NOT",
+                        "free" => "857.49",
+                        "locked" => "0"
+                    ],
+                    [
+                        "asset" => "USDT",
+                        "free" => "0.00991188",
+                        "locked" => "0"
+                    ],
+                    [
+                        "asset" => "XRP",
+                        "free" => "8.83879665",
+                        "locked" => "0"
+                    ]
+                ]
+            ]
+        ],
+        [
+            "type" => "spot",
+            "updateTime" => 1744070399000,
+            "data" => [
+                "totalAssetOfBtc" => "0.00022923",
+                "balances" => [
+                    [
+                        "asset" => "NOT",
+                        "free" => "857.49",
+                        "locked" => "0"
+                    ],
+                    [
+                        "asset" => "USDT",
+                        "free" => "0.00991188",
+                        "locked" => "0"
+                    ],
+                    [
+                        "asset" => "XRP",
+                        "free" => "8.83879665",
+                        "locked" => "0"
+                    ]
+                ]
+            ]
+        ]
+    ]
+];
+   $assets = "XRP";
 
     foreach ($snapshot['snapshotVos'] ?? [] as $entry) {
         foreach ($entry['data']['balances'] as $balance) {
