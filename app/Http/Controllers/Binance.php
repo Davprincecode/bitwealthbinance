@@ -140,12 +140,15 @@ private function getPreviousDayTimestamp($timestamp)
     return $previousDaySeconds * 1000;
 }
 
-private function getAccountSnapshot($timestamp)
+public function getAccountSnapshot($timestamp)
 {
     $response = $this->api->accountSnapshot("SPOT", [
         'timestamp' =>  $this->syncServerTime()
     ]);
 
+    // $this->api->accountSnapshot("SPOT", [
+    //     'timestamp' =>  $this->syncServerTime()
+    // ])
     // startTime
     // endTime
     return $response->json();

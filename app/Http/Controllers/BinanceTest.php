@@ -143,6 +143,8 @@ public function getAllOrder(Request $request){
             return ['error' => $e->getMessage()];
         }
     }
+
+
     public function myBalanceFutures(){
         try {
 
@@ -197,7 +199,7 @@ public function getAllOrder(Request $request){
 public function myTrade()
 {
 
-    
+
             // 'startTime' => "1668017244486",
             // 'endTime' => "1668017244486"
 
@@ -262,7 +264,7 @@ private function getPreviousDayTimestamp($timestamp)
     return strtotime('-1 day', $timestamp / 1000) * 1000;
 }
 
-private function getAccountSnapshot($timestamp)
+public function getAccountSnapshot($timestamp)
 {
     $response = $this->api->accountSnapshot("SPOT", [
         'timestamp' =>  $timestamp
