@@ -214,7 +214,6 @@ private function calculateBalance($balances, $deposits, $withdrawals)
     return $balances;
 }
 
-
 public function depositRangeHistory(){
     try {
 
@@ -235,5 +234,27 @@ public function withdrawRangeHistory(){
         return ['error' => $e->getMessage()];
     }
 }
+
+
+public function walletBalanceAndAsset(){
+    try {
+        $balance = $this->api->queryUserWalletBalance([
+            'timestamp' =>  $this->syncServerTime()
+        ]);
+        $asset = $this->api->userAsset([
+            'timestamp' =>  $this->syncServerTime()
+        ]);
+        return response()->json([
+            'status' => 'true',
+            'data' => [
+                'balance' => $balance,
+                'asset' => $asset
+            ]
+        ], 200);
+    } catch (\Exception $e) {
+        return ['error' => $e->getMessage()];
+    }
+}
+
 
 }

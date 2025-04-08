@@ -157,7 +157,6 @@ public function getAllOrder(Request $request){
     }
     public function myBalance(){
         try {
-
             return response()->json($this->api->queryUserWalletBalance([
                 'timestamp' =>  $this->syncServerTime()
             ]));
