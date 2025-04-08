@@ -113,7 +113,7 @@ public function getBalanceAtTime($timestamp, $firstSymbol, $secondSymbol)
 
     $snapshot = $this->getAccountSnapshot($previousDayTimestamp);
 
-    $balances = $this->extractBalances($snapshot, [$secondSymbol, $firstSymbol]);
+    // $balances = $this->extractBalances($snapshot, [$secondSymbol, $firstSymbol]);
 
     // 2️⃣ Fetch deposits & withdrawals for the target day
 
@@ -124,7 +124,7 @@ public function getBalanceAtTime($timestamp, $firstSymbol, $secondSymbol)
 
     // $finalBalance = $this->calculateBalance($balances, $deposits, $withdrawals);
 
-    return $balances;
+    return $snapshot;
 }
 
 private function getPreviousDayTimestamp($timestamp)
@@ -154,24 +154,14 @@ public function getAccountSnapshot($timestamp)
         return ['error' => $e->getMessage()];
     }
 
-
-
-    // $response = $this->api->accountSnapshot("SPOT", [
-    //     'timestamp' =>  $this->syncServerTime()
-    // ]);
-
-    // $this->api->accountSnapshot("SPOT", [
-    //     'timestamp' =>  $this->syncServerTime()
-    // ])
-    // startTime
-    // endTime
-    // $response->json()
-    // return "hello world";
 }
 
-private function extractBalances($snapshot, $assets)
+private function extractBalances(Request $request)
 {
     $balances = [];
+
+   $snapshot = $request->snapshot;
+   $assets = $request->assets;
 
     foreach ($snapshot['snapshotVos'] ?? [] as $entry) {
         foreach ($entry['data']['balances'] as $balance) {

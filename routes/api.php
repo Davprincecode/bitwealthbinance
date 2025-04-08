@@ -23,6 +23,7 @@ Route::get('/binance/trade-history/{symbol}', [BinanceFuture::class, 'tradeHisto
 
 // =========================== binance spot start =================
 Route::get('/binance/accountsnap/{timestamp}', [Binance::class, 'getAccountSnapshot']);
+Route::get('/binance/extrabalance', [Binance::class, 'extractBalances']);
 // ========================= binance spot end ===================
 
 
