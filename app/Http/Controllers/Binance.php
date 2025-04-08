@@ -142,16 +142,17 @@ private function getPreviousDayTimestamp($timestamp)
 
 public function getAccountSnapshot($timestamp)
 {
-    $response = $this->api->accountSnapshot("SPOT", [
-        'timestamp' =>  $this->syncServerTime()
-    ]);
+    // $response = $this->api->accountSnapshot("SPOT", [
+    //     'timestamp' =>  $this->syncServerTime()
+    // ]);
 
     // $this->api->accountSnapshot("SPOT", [
     //     'timestamp' =>  $this->syncServerTime()
     // ])
     // startTime
     // endTime
-    return $response->json();
+    // $response->json()
+    return "hello world";
 }
 
 private function extractBalances($snapshot, $assets)
