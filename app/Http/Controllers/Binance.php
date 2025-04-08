@@ -111,17 +111,15 @@ public function getBalanceAtTime($timestamp, $firstSymbol, $secondSymbol)
     // 1️⃣ Get account snapshot from the previous day
 
 
-    // $snapshot = $this->getAccountSnapshot($previousDayTimestamp);
-    // $balances = $this->extractBalances($snapshot, [$secondSymbol, $firstSymbol]);
+    $snapshot = $this->getAccountSnapshot($previousDayTimestamp);
+    $balances = $this->extractBalances($snapshot, [$secondSymbol, $firstSymbol]);
 
     // 2️⃣ Fetch deposits & withdrawals for the target day
-
-    // $deposits = $this->getDeposits($previousDayTimestamp, $timestamp);
-    // $withdrawals = $this->getWithdrawals($previousDayTimestamp, $timestamp);
+    $deposits = $this->getDeposits($previousDayTimestamp, $timestamp);
+    $withdrawals = $this->getWithdrawals($previousDayTimestamp, $timestamp);
 
     // 3️⃣ Apply transactions to update balances
-
-    // $finalBalance = $this->calculateBalance($balances, $deposits, $withdrawals);
+    $finalBalance = $this->calculateBalance($balances, $deposits, $withdrawals);
 
     return $previousDayTimestamp;
 }
