@@ -156,7 +156,7 @@ public function getAccountSnapshot($timestamp)
 
 }
 
-private function extractBalances(Request $request)
+public function extractBalances(Request $request)
 {
     $balances = [];
 
