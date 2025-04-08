@@ -24,14 +24,14 @@ Route::get('/binance/trade-history/{symbol}', [BinanceFuture::class, 'tradeHisto
 // =========================== binance spot start =================
 Route::get('/binance/accountsnap/{timestamp}', [Binance::class, 'getAccountSnapshot']);
 Route::get('/binance/extrabalance', [Binance::class, 'extractBalances']);
-
-
 Route::get('/binance/deposits/{startTime}/{endTime}', [Binance::class, 'getDeposits']);
-
 Route::get('/binance/withdraw/{startTime}/{endTime}', [Binance::class, 'getWithdrawals']);
 // ========================= binance spot end ===================
 
-
+// ======================== binance deposit & withdraw
+Route::get('/binance/deposit-history', [Binance::class, 'depositRangeHistory']);
+Route::get('/binance/withdraw-history', [Binance::class, 'withdrawRangeHistory']);
+// ================ binance deposit & withdraw end
 
 
 

@@ -121,9 +121,9 @@ public function getBalanceAtTime($timestamp, $firstSymbol, $secondSymbol)
 
     // 3️⃣ Apply transactions to update balances
 
-    // $finalBalance = $this->calculateBalance($balances, $deposits, $withdrawals);
+    $finalBalance = $this->calculateBalance($balances, $deposits, $withdrawals);
 
-    return $balances;
+    return $finalBalance;
 }
 
 private function getPreviousDayTimestamp($timestamp)
@@ -174,7 +174,6 @@ private function extractBalances($snapshot, $assets)
 public function getDeposits($startTime, $endTime)
 {
     try {
-
         return response()->json($this->api->depositHistory([
             'timestamp' =>  + $this->syncServerTime(),
             'startTime' => $startTime,
@@ -216,5 +215,25 @@ private function calculateBalance($balances, $deposits, $withdrawals)
 }
 
 
+public function depositRangeHistory(){
+    try {
+
+        return response()->json($this->api->depositHistory([
+            'timestamp' =>  + $this->syncServerTime()
+        ]));
+    } catch (\Exception $e) {
+        return ['error' => $e->getMessage()];
+    }
+}
+
+public function withdrawRangeHistory(){
+    try {
+        return response()->json($this->api->withdrawHistory([
+            'timestamp' =>  + $this->syncServerTime()
+        ]));
+    } catch (\Exception $e) {
+        return ['error' => $e->getMessage()];
+    }
+}
 
 }
