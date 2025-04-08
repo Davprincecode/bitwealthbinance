@@ -174,6 +174,7 @@ private function extractBalances($snapshot, $assets)
 public function getDeposits($startTime, $endTime)
 {
     $response = $this->api->depositHistory([
+        'timestamp' =>  $this->syncServerTime(),
         'startTime' => $startTime,
         'endTime' => $endTime
     ]);
@@ -184,6 +185,7 @@ public function getDeposits($startTime, $endTime)
 public function getWithdrawals($startTime, $endTime)
 {
     $response = $this->api->withdrawHistory([
+        'timestamp' =>  $this->syncServerTime(),
         'startTime' => $startTime,
         'endTime' => $endTime
     ]);
