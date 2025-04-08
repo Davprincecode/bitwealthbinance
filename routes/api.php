@@ -21,6 +21,14 @@ Route::get('/binance/all-order/{symbol}', [BinanceFuture::class, 'positionAllOrd
 Route::get('/binance/trade-history/{symbol}', [BinanceFuture::class, 'tradeHistory']);
 // ============================= binance future end =============
 
+// =========================== binance spot start =================
+Route::get('/binance/accountsnap/{timestamp}', [Binance::class, 'getAccountSnapshot']);
+// ========================= binance spot end ===================
+
+
+
+
+
 Route::get('/binance', [BinanceTest::class, 'getAccountInfo']);
 
 Route::get('/binance/time', [BinanceTest::class, ' checkTime']);
