@@ -87,13 +87,13 @@ public function myTrade($startTime, $endTime, $firstSymbol, $secondSymbol)
 
         $response = $this->api->myTrades($symbol, $params);
 
-        // $balance = $this->getBalanceAtTime($startTime, $firstSymbol, $secondSymbol);
+        $balance = $this->getBalanceAtTime($startTime, $firstSymbol, $secondSymbol);
 
         return response()->json([
                "status" => true,
                "data" => [
                 "trade" => $response,
-                // "balance" => $balance
+                "balance" => $balance
                ]
         ], 200);
     } catch (\Exception $e) {
@@ -124,7 +124,16 @@ public function getBalanceAtTime($timestamp, $firstSymbol, $secondSymbol)
 
 private function getPreviousDayTimestamp($timestamp)
 {
-    return strtotime('-1 day', $timestamp / 1000) * 1000;
+    // return strtotime('-1 day', $timestamp / 1000) * 1000;
+
+    // Convert milliseconds to seconds as integer
+    $seconds = (int)($timestamp / 1000);
+
+    // Get previous day's timestamp in seconds
+    $previousDaySeconds = strtotime('-1 day', $seconds);
+
+    // Convert back to milliseconds
+    return $previousDaySeconds * 1000;
 }
 
 private function getAccountSnapshot($timestamp)
