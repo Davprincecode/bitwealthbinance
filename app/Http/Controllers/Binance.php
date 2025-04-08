@@ -143,12 +143,13 @@ private function getPreviousDayTimestamp($timestamp)
 public function getAccountSnapshot($timestamp)
 {
 
-
     try {
-
-        return response()->json($this->api->accountSnapshot("SPOT", [
+        $response = $this->api->accountSnapshot("SPOT", [
             'timestamp' =>  $this->syncServerTime()
-        ]));
+        ]);
+
+        return  $response->json();
+
     } catch (\Exception $e) {
         return ['error' => $e->getMessage()];
     }
