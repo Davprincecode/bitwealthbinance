@@ -123,7 +123,7 @@ public function getBalanceAtTime($timestamp, $firstSymbol, $secondSymbol)
 
     // $finalBalance = $this->calculateBalance($balances, $deposits, $withdrawals);
 
-    return $previousDayTimestamp;
+    return $snapshot;
 }
 
 private function getPreviousDayTimestamp($timestamp)
@@ -142,7 +142,6 @@ private function getPreviousDayTimestamp($timestamp)
 
 public function getAccountSnapshot($timestamp)
 {
-
     try {
         return response()->json($this->api->accountSnapshot("SPOT", [
             'timestamp' =>  $this->syncServerTime(),
