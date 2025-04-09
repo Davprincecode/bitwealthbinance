@@ -5,40 +5,40 @@ use App\Http\Controllers\BinanceFuture;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BinanceTest;
 
+//--------------------------------------------------------
 
 // ===================== binance start ===========
 
 // ============ binance end ==============
-Route::get('/binance/tradespot/{startTime}/{endTime}/{firstSymbol}/{secondSymbol}', [Binance::class, 'myTrade']);
+Route::get('/binance/tradespot/{startTime}/{endTime}/{firstSymbol}/{secondSymbol}/{apiKey}/{secretKey}', [Binance::class, 'myTrade']);
 // ============= binane test below start =================
 
 
 // =============================== binance future ======
-Route::get('/binance/open-orders/{symbol}', [BinanceFuture::class, 'openOrders']);
-Route::get('/binance/positions', [BinanceFuture::class, 'positions']);
-Route::get('/binance/position-history/{symbol}', [BinanceFuture::class, 'positionHistory']);
-Route::get('/binance/all-order/{symbol}', [BinanceFuture::class, 'positionAllOrder']);
-Route::get('/binance/trade-history/{symbol}', [BinanceFuture::class, 'tradeHistory']);
+Route::get('/binance/open-orders/{symbol}/{apiKey}/{secretKey}', [BinanceFuture::class, 'openOrders']);
+Route::get('/binance/positions/{apiKey}/{secretKey}', [BinanceFuture::class, 'positions']);
+Route::get('/binance/position-history/{symbol}/{apiKey}/{secretKey}', [BinanceFuture::class, 'positionHistory']);
+Route::get('/binance/all-order/{symbol}/{apiKey}/{secretKey}', [BinanceFuture::class, 'positionAllOrder']);
+Route::get('/binance/trade-history/{symbol}/{apiKey}/{secretKey}', [BinanceFuture::class, 'tradeHistory']);
 // ============================= binance future end =============
 
 // =========================== binance spot start =================
-Route::get('/binance/accountsnap/{timestamp}', [Binance::class, 'getAccountSnapshot']);
-Route::get('/binance/extrabalance', [Binance::class, 'extractBalances']);
-Route::get('/binance/deposits/{startTime}/{endTime}', [Binance::class, 'getDeposits']);
-Route::get('/binance/withdraw/{startTime}/{endTime}', [Binance::class, 'getWithdrawals']);
+Route::get('/binance/accountsnap/{timestamp}/{apiKey}/{secretKey}', [Binance::class, 'getAccountSnapshot']);
+Route::get('/binance/extrabalance/{apiKey}/{secretKey}', [Binance::class, 'extractBalances']);
+Route::get('/binance/deposits/{startTime}/{endTime}/{apiKey}/{secretKey}', [Binance::class, 'getDeposits']);
+Route::get('/binance/withdraw/{startTime}/{endTime}/{apiKey}/{secretKey}', [Binance::class, 'getWithdrawals']);
 // ========================= binance spot end ===================
 
 // ======================== binance deposit & withdraw
-Route::get('/binance/deposit-history', [Binance::class, 'depositRangeHistory']);
-Route::get('/binance/withdraw-history', [Binance::class, 'withdrawRangeHistory']);
-Route::get('/binance/wallet', [Binance::class, 'walletBalanceAndAsset']);
+Route::get('/binance/deposit-history/{apiKey}/{secretKey}', [Binance::class, 'depositRangeHistory']);
+Route::get('/binance/withdraw-history/{apiKey}/{secretKey}', [Binance::class, 'withdrawRangeHistory']);
+Route::get('/binance/wallet/{apiKey}/{secretKey}', [Binance::class, 'walletBalanceAndAsset']);
 // ============ verify account ============
 Route::get('/binance/verifyaccount/{apiKey}/{secretKey}', [Binance::class, 'verifyAccount']);
 // ================ binance deposit & withdraw end
 
-Route::middleware(['verify.api'])->group(function () {
-    Route::get('/binance/testapi', [BinanceTest::class, 'getApiKey']);
-});
+// ------------------------------------------------------
+
 
 Route::get('/binance', [BinanceTest::class, 'getAccountInfo']);
 
