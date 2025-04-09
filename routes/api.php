@@ -36,7 +36,9 @@ Route::get('/binance/wallet', [Binance::class, 'walletBalanceAndAsset']);
 Route::get('/binance/verifyaccount/{apiKey}/{secretKey}', [Binance::class, 'verifyAccount']);
 // ================ binance deposit & withdraw end
 
-
+Route::middleware(['verify.api'])->group(function () {
+    Route::get('/binance', [BinanceTest::class, 'getApiKey']);
+});
 
 Route::get('/binance', [BinanceTest::class, 'getAccountInfo']);
 

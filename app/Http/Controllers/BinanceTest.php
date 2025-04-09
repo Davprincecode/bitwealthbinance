@@ -36,6 +36,19 @@ class BinanceTest extends Controller
 
     }
 
+  public function getApiKey(Request $request){
+    $key = $request->get('api_key');
+    $secret = $request->get('secret_key');
+
+    return response()->json([
+        'status' => true,
+        'user' => [
+            'key' => $key,
+            'secret' => $secret
+        ]
+    ]);
+  }
+
    private function syncServerTime()
     {
         $binance = new Spot();
