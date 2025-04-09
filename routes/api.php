@@ -32,6 +32,8 @@ Route::get('/binance/withdraw/{startTime}/{endTime}', [Binance::class, 'getWithd
 Route::get('/binance/deposit-history', [Binance::class, 'depositRangeHistory']);
 Route::get('/binance/withdraw-history', [Binance::class, 'withdrawRangeHistory']);
 Route::get('/binance/wallet', [Binance::class, 'walletBalanceAndAsset']);
+// ============ verify account ============
+Route::get('/binance/verifyaccount/{apiKey}/{secretKey}', [Binance::class, 'verifyAccount']);
 // ================ binance deposit & withdraw end
 
 

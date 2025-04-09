@@ -123,7 +123,6 @@ public function getAllOrder(Request $request){
 
     public function myAccountInfo(){
         try {
-
             return response()->json($this->api->accountInfo([
                 'timestamp' =>  + $this->syncServerTime()
             ]));
