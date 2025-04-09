@@ -15,8 +15,10 @@ class VerifyApiCredentials
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // Log the headers to check if they are being received
+    \Log::info('Incoming Headers:', $request->headers->all());
         dd($request->headers->all());
-        
+
         $apiKey = $request->header('api_key');
         $secretKey = $request->header('secret_key');
 
