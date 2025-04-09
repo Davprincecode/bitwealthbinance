@@ -260,11 +260,20 @@ public function verifyAccount($apiKey, $secretKey){
             'key' => $apiKey,
             'secret' => $secretKey
         ]);
-        return response()->json($api->accountInfo([
+
+        $data = $api->accountInfo([
             'timestamp' =>  + $this->syncServerTime()
-        ]));
+        ]);
+        return response()->json([
+            'status' => "true",
+            'data' => $data
+        ], 200);
     } catch (\Exception $e) {
-        return ['error' => $e->getMessage()];
+
+        return response()->json([
+            'status' => "false",
+            'message' => $e->getMessage()
+        ], 500);
     }
 }
 
