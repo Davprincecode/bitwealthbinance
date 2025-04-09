@@ -37,8 +37,8 @@ class BinanceTest extends Controller
     }
 
   public function getApiKey(Request $request){
-    $key = $request->get('api_key');
-    $secret = $request->get('secret_key');
+    $key = $request->input('api_key');
+    $secret = $request->input('secret_key');
 
     return response()->json([
         'status' => true,
