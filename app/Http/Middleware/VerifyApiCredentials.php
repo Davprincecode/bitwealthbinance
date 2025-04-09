@@ -17,12 +17,14 @@ class VerifyApiCredentials
     {
         $apiKey = $request->header('api_key');
         $secretKey = $request->header('secret_key');
-        if (!$apiKey || !$secretKey) {
-            return response()->json([
-                'status' => false,
-                'message' => 'API key and Secret key are required.'
-            ], 401);
-        }
+
+        // if (!$apiKey || !$secretKey) {
+        //     return response()->json([
+        //         'status' => false,
+        //         'message' => 'API key and Secret key are required.'
+        //     ], 401);
+        // }
+
         $request->merge(['api_key' => $apiKey, "secret_key" => $secretKey]);
         return $next($request);
     }
