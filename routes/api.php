@@ -37,7 +37,7 @@ Route::get('/binance/verifyaccount/{apiKey}/{secretKey}', [Binance::class, 'veri
 // ================ binance deposit & withdraw end
 
 Route::middleware(['verify.api'])->group(function () {
-    Route::get('/binance', [BinanceTest::class, 'getApiKey']);
+    Route::get('/binance/testapi', [BinanceTest::class, 'getApiKey']);
 });
 
 Route::get('/binance', [BinanceTest::class, 'getAccountInfo']);
