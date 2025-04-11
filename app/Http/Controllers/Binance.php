@@ -268,15 +268,12 @@ public function walletBalanceAndAsset($apiKey, $secretKey){
         $balance = $api->queryUserWalletBalance([
             'timestamp' =>  $this->syncServerTime()
         ]);
-        $asset = $api->userAsset([
-            'timestamp' =>  $this->syncServerTime()
-        ]);
+        // $asset = $api->userAsset([
+        //     'timestamp' =>  $this->syncServerTime()
+        // ]);
         return response()->json([
             'status' => 'true',
-            'data' => [
-                'balance' => $balance,
-                'asset' => $asset
-            ]
+            'data' =>  $balance
         ], 200);
     } catch (\Exception $e) {
         return ['error' => $e->getMessage()];
