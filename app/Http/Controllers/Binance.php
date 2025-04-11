@@ -11,14 +11,14 @@ class Binance extends Controller
     //
     protected $api;
 
-    // $this->api = new Spot([
+    // $api = new Spot([
     //     'key' => 'v83VOrFC6b1yq3tbdoGRMj7l0bYyGnb589z6MhA6L3z4nM9ejJGTCO2sfHhYK7qD',
     //     'secret' => '0jThJwNQBIu35cJtWAHulsTWrpD9PunGdAEi53nvBIxqd746eojx9EanBex1OFgO'
     // ]);
 
     public function __construct()
     {
-        $this->api = new Spot([
+        $api = new Spot([
             // 'key' => 'nZCT8PkhJL7mQloPeE1velhBEf2GIl0peF6qn7BnJoyWKy1d6i74nRAqgOIfnVEi',
             // 'secret' => 'y6Web7GZX5t7pffasRRtmJO1H6UU5dDGfctFIVUEjmWey0UNcOZOYQS04NK1rziW'
 
@@ -75,9 +75,14 @@ class Binance extends Controller
 
 
 
-public function myTrade($startTime, $endTime, $firstSymbol, $secondSymbol)
+public function myTrade($startTime, $endTime, $firstSymbol, $secondSymbol, $apiKey, $secretKey)
 {
+
     try {
+        $api = new Spot([
+        'key' => $apiKey,
+        'secret' => $secretKey
+         ]);
         $params = [
             'timestamp' => $this->syncServerTime(),
             'startTime' => $startTime,
@@ -85,9 +90,9 @@ public function myTrade($startTime, $endTime, $firstSymbol, $secondSymbol)
         ];
         $symbol = $firstSymbol.$secondSymbol;
 
-        $response = $this->api->myTrades($symbol, $params);
+        $response = $api->myTrades($symbol, $params);
 
-        $balance = $this->getBalanceAtTime($startTime, $firstSymbol, $secondSymbol);
+        $balance = $this->getBalanceAtTime($apiKey, $secretKey, $startTime, $firstSymbol, $secondSymbol);
 
         return response()->json([
                "status" => true,
@@ -104,20 +109,20 @@ public function myTrade($startTime, $endTime, $firstSymbol, $secondSymbol)
 
 // =================================== get user balance================================
 
-public function getBalanceAtTime($timestamp, $firstSymbol, $secondSymbol)
+public function getBalanceAtTime($apiKey, $secretKey, $timestamp, $firstSymbol, $secondSymbol)
 {
     $previousDayTimestamp = $this->getPreviousDayTimestamp($timestamp);
 
     // 1️⃣ Get account snapshot from the previous day
 
-    $snapshot = $this->getAccountSnapshot($previousDayTimestamp);
+    $snapshot = $this->getAccountSnapshot($apiKey, $secretKey, $previousDayTimestamp);
 
     $balances = $this->extractBalances($snapshot, [$secondSymbol, $firstSymbol]);
 
     // 2️⃣ Fetch deposits & withdrawals for the target day
 
-    $deposits = $this->getDeposits($previousDayTimestamp, $timestamp);
-    $withdrawals = $this->getWithdrawals($previousDayTimestamp, $timestamp);
+    $deposits = $this->getDeposits($apiKey, $secretKey, $previousDayTimestamp, $timestamp);
+    $withdrawals = $this->getWithdrawals($apiKey, $secretKey, $previousDayTimestamp, $timestamp);
 
     // 3️⃣ Apply transactions to update balances
 
@@ -140,10 +145,14 @@ private function getPreviousDayTimestamp($timestamp)
     return $previousDaySeconds * 1000;
 }
 
-public function getAccountSnapshot($timestamp)
+public function getAccountSnapshot($apiKey, $secretKey, $timestamp)
 {
     try {
-        return response()->json($this->api->accountSnapshot("SPOT", [
+        $api = new Spot([
+            'key' => $apiKey,
+            'secret' => $secretKey
+             ]);
+        return response()->json($api->accountSnapshot("SPOT", [
             'timestamp' =>  $this->syncServerTime(),
             'startTime' => $timestamp,
              'endTime' => $timestamp
@@ -171,10 +180,14 @@ private function extractBalances($snapshot, $assets)
     return $balances;
 }
 
-public function getDeposits($startTime, $endTime)
+public function getDeposits($apiKey, $secretKey, $startTime, $endTime)
 {
     try {
-        return response()->json($this->api->depositHistory([
+        $api = new Spot([
+            'key' => $apiKey,
+            'secret' => $secretKey
+             ]);
+        return response()->json($api->depositHistory([
             'timestamp' =>  + $this->syncServerTime(),
             'startTime' => $startTime,
             'endTime' => $endTime
@@ -184,10 +197,14 @@ public function getDeposits($startTime, $endTime)
     }
 }
 
-public function getWithdrawals($startTime, $endTime)
+public function getWithdrawals($apiKey, $secretKey, $startTime, $endTime)
 {
     try {
-        return response()->json($this->api->withdrawHistory([
+        $api = new Spot([
+            'key' => $apiKey,
+            'secret' => $secretKey
+             ]);
+        return response()->json($api->withdrawHistory([
             'timestamp' =>  + $this->syncServerTime(),
             'startTime' => $startTime,
             'endTime' => $endTime
@@ -214,10 +231,13 @@ private function calculateBalance($balances, $deposits, $withdrawals)
     return $balances;
 }
 
-public function depositRangeHistory(){
+public function depositRangeHistory($apiKey, $secretKey){
     try {
-
-        return response()->json($this->api->depositHistory([
+        $api = new Spot([
+            'key' => $apiKey,
+            'secret' => $secretKey
+        ]);
+        return response()->json($api->depositHistory([
             'timestamp' =>  + $this->syncServerTime()
         ]));
     } catch (\Exception $e) {
@@ -225,21 +245,30 @@ public function depositRangeHistory(){
     }
 }
 
-public function withdrawRangeHistory(){
+public function withdrawRangeHistory($apiKey, $secretKey){
+
     try {
-        return response()->json($this->api->withdrawHistory([
+        $api = new Spot([
+            'key' => $apiKey,
+            'secret' => $secretKey
+        ]);
+        return response()->json($api->withdrawHistory([
             'timestamp' =>  + $this->syncServerTime()
         ]));
     } catch (\Exception $e) {
         return ['error' => $e->getMessage()];
     }
 }
-public function walletBalanceAndAsset(){
+public function walletBalanceAndAsset($apiKey, $secretKey){
     try {
-        $balance = $this->api->queryUserWalletBalance([
+        $api = new Spot([
+            'key' => $apiKey,
+            'secret' => $secretKey
+        ]);
+        $balance = $api->queryUserWalletBalance([
             'timestamp' =>  $this->syncServerTime()
         ]);
-        $asset = $this->api->userAsset([
+        $asset = $api->userAsset([
             'timestamp' =>  $this->syncServerTime()
         ]);
         return response()->json([

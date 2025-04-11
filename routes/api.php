@@ -9,9 +9,9 @@ use App\Http\Controllers\BinanceTest;
 
 // ===================== binance start ===========
 
-// ============ binance end ==============
+// ============ binance spot ==============
 Route::get('/binance/tradespot/{startTime}/{endTime}/{firstSymbol}/{secondSymbol}/{apiKey}/{secretKey}', [Binance::class, 'myTrade']);
-// ============= binane test below start =================
+// ============= binane spot end =================
 
 
 // =============================== binance future ======
@@ -23,10 +23,11 @@ Route::get('/binance/trade-history/{symbol}/{apiKey}/{secretKey}', [BinanceFutur
 // ============================= binance future end =============
 
 // =========================== binance spot start =================
-Route::get('/binance/accountsnap/{timestamp}/{apiKey}/{secretKey}', [Binance::class, 'getAccountSnapshot']);
-Route::get('/binance/extrabalance/{apiKey}/{secretKey}', [Binance::class, 'extractBalances']);
-Route::get('/binance/deposits/{startTime}/{endTime}/{apiKey}/{secretKey}', [Binance::class, 'getDeposits']);
-Route::get('/binance/withdraw/{startTime}/{endTime}/{apiKey}/{secretKey}', [Binance::class, 'getWithdrawals']);
+// Route::get('/binance/accountsnap/{timestamp}/{apiKey}/{secretKey}', [Binance::class, 'getAccountSnapshot']);
+// Route::get('/binance/extrabalance/{apiKey}/{secretKey}', [Binance::class, 'extractBalances']);
+// Route::
+// get('/binance/deposits/{startTime}/{endTime}/{apiKey}/{secretKey}', [Binance::class, 'getDeposits']);
+// Route::get('/binance/withdraw/{startTime}/{endTime}/{apiKey}/{secretKey}', [Binance::class, 'getWithdrawals']);
 // ========================= binance spot end ===================
 
 // ======================== binance deposit & withdraw
