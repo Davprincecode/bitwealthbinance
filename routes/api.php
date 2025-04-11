@@ -15,12 +15,17 @@ Route::get('/binance/tradespot/{startTime}/{endTime}/{firstSymbol}/{secondSymbol
 
 
 // =============================== binance future ======
-Route::get('/binance/open-orders/{symbol}/{apiKey}/{secretKey}', [BinanceFuture::class, 'openOrders']);
 
-Route::get('/binance/positions/{apiKey}/{secretKey}', [BinanceFuture::class, 'positions']);
+
+
 Route::get('/binance/position-history/{symbol}/{apiKey}/{secretKey}', [BinanceFuture::class, 'positionHistory']);
 Route::get('/binance/all-order/{symbol}/{apiKey}/{secretKey}', [BinanceFuture::class, 'positionAllOrder']);
-Route::get('/binance/trade-history/{symbol}/{apiKey}/{secretKey}', [BinanceFuture::class, 'tradeHistory']);
+
+// ====================
+
+Route::get('/binance/open-orders/{apiKey}/{secretKey}/{symbol}', [BinanceFuture::class, 'openOrders']);
+Route::get('/binance/positions/{apiKey}/{secretKey}', [BinanceFuture::class, 'positions']);
+Route::get('/binance/trade-history/{apiKey}/{secretKey}/{symbol}', [BinanceFuture::class, 'tradeHistory']);
 // ============================= binance future end =============
 
 // =========================== binance spot start =================
