@@ -66,7 +66,7 @@ class BinanceFuturesService
     /**
      * Get Open Orders
      */
-    
+
     public function getOpenOrders($apiKey, $secretKey, $symbol)
     {
          $this->apiKey = $apiKey;
@@ -76,7 +76,8 @@ class BinanceFuturesService
 
         return response()->json([
             'apiKey' => $this->apiKey,
-            'secretKey' => $this->apiSecret
+            'secretKey' => $this->apiSecret,
+            'symbol' => $symbol
         ], 200);
 
 
