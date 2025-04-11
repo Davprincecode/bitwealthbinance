@@ -72,15 +72,7 @@ class BinanceFuturesService
          $this->apiKey = $apiKey;
          $this->apiSecret = $secretKey;
 
-        // return $this->makeRequest('get', '/fapi/v1/openOrders',  ['symbol' => $symbol], true);
-
-        return response()->json([
-            'apiKey' => $this->apiKey,
-            'secretKey' => $this->apiSecret,
-            'symbol' => $symbol
-        ], 200);
-
-
+        return $this->makeRequest('get', '/fapi/v1/openOrders',  ['symbol' => $symbol], true);
     }
 
 
