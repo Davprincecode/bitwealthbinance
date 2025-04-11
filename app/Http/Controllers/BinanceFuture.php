@@ -17,9 +17,7 @@ class BinanceFuture extends Controller
     public function openOrders($apiKey, $secretKey, $symbol)
     {
     try {
-
         return response()->json($this->binanceService->getOpenOrders($apiKey, $secretKey, $symbol));
-
     } catch (\Exception $e) {
         return ['error' => $e->getMessage()];
     }
@@ -27,14 +25,22 @@ class BinanceFuture extends Controller
 
     public function positions($apiKey, $secretKey)
     {
+        try {
         return response()->json($this->binanceService->getPositions($apiKey, $secretKey));
+    } catch (\Exception $e) {
+        return ['error' => $e->getMessage()];
+    }
     }
 
 
 
     public function tradeHistory($apiKey, $secretKey, $symbol)
     {
+        try {
         return response()->json($this->binanceService->getTradeHistory($apiKey, $secretKey, $symbol));
+    } catch (\Exception $e) {
+        return ['error' => $e->getMessage()];
+    }
     }
 
 
