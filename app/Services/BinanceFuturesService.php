@@ -27,8 +27,10 @@ class BinanceFuturesService
         // $this->apiKey = 'P3jlSw2QSps6dSK52rEQxXbIiSnI6SS5d09xGpupvfYLVGdFsNAjLP8JDQ4qGgNC';
         // $this->apiSecret = 'xyly5WesyjRdVZWw2f8nTZnHgViFYiuoWDoQk9iKnc9dOVo3mxACzJj9Q2358rOM';
 
-        $this->apiKey = '1c9c2e1837b75f91ee5bbd0b3d15ef5571868946644c8a0da5ed2e8d461fbb1c';
-        $this->apiSecret = '38dc061581dfb14a693b61eaa4d637e1de0c98129635f2c672b5f993a6ec3d2b';
+        // $this->apiKey = '1c9c2e1837b75f91ee5bbd0b3d15ef5571868946644c8a0da5ed2e8d461fbb1c';
+        // $this->apiSecret = '38dc061581dfb14a693b61eaa4d637e1de0c98129635f2c672b5f993a6ec3d2b';
+
+
         $this->baseUrl = "https://testnet.binancefuture.com";
     }
 
@@ -64,8 +66,10 @@ class BinanceFuturesService
     /**
      * Get Open Orders
      */
-    public function getOpenOrders($symbol)
+    public function getOpenOrders($apiKey, $secretKey, $symbol)
     {
+         $this->apiKey = $apiKey;
+         $this->apiSecret = $secretKey;
         return $this->makeRequest('get', '/fapi/v1/openOrders',  ['symbol' => $symbol], true);
     }
 
@@ -73,8 +77,10 @@ class BinanceFuturesService
     /**
      * Get Open Positions
      */
-    public function getPositions()
+    public function getPositions($apiKey, $secretKey)
     {
+        $this->apiKey = $apiKey;
+        $this->apiSecret = $secretKey;
         return $this->makeRequest('get', '/fapi/v3/positionRisk', [], true);
     }
 
@@ -85,12 +91,15 @@ class BinanceFuturesService
     {
         return $this->makeRequest('get', '/fapi/v1/userTrades', ['symbol' => $symbol], true);
     }
+
     public function getAllOrder($symbol)
     {
         return $this->makeRequest('get', '/fapi/v1/allOrders', ['symbol' => $symbol], true);
     }
-    public function getTradeHistory($symbol)
+    public function getTradeHistory($apiKey, $secretKey, $symbol)
     {
+        $this->apiKey = $apiKey;
+        $this->apiSecret = $secretKey;
         return $this->makeRequest('get', '/fapi/v1/userTrades', ['symbol' => $symbol], true);
     }
 }
