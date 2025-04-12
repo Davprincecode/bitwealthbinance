@@ -92,13 +92,13 @@ public function myTrade($startTime, $endTime, $firstSymbol, $secondSymbol, $apiK
 
         $response = $api->myTrades($symbol, $params);
 
-        $balance = $this->getBalanceAtTime($apiKey, $secretKey, $startTime, $firstSymbol, $secondSymbol);
+        // $balance = $this->getBalanceAtTime($apiKey, $secretKey, $startTime, $firstSymbol, $secondSymbol);
 
         return response()->json([
                "status" => true,
                "data" => [
                 "trade" => $response,
-                "balance" => $balance
+                // "balance" => $balance
                ]
         ], 200);
     } catch (\Exception $e) {
