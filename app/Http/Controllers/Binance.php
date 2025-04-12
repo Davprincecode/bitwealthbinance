@@ -185,8 +185,8 @@ public function getAccountSnapshot($apiKey, $secretKey, $timestamp)
              ]);
         return response()->json($api->accountSnapshot("SPOT", [
             'timestamp' =>  $this->syncServerTime(),
-            'startTime' => $timestamp,
-             'endTime' => $timestamp
+            // 'startTime' => $timestamp,
+            //  'endTime' => $timestamp
         ]));
 
     } catch (\Exception $e) {
