@@ -115,9 +115,9 @@ public function myTradeTest($startTime, $endTime, $firstSymbol, $secondSymbol, $
          ]);
         $params = [
             'timestamp' => $this->syncServerTime()
-            ,
-            'startTime' => $startTime,
-            'endTime' => $endTime
+            // ,
+            // 'startTime' => $startTime,
+            // 'endTime' => $endTime
         ];
         $symbol = $firstSymbol.$secondSymbol;
 
