@@ -85,8 +85,8 @@ public function myTrade($startTime, $endTime, $firstSymbol, $secondSymbol, $apiK
          ]);
         $params = [
             'timestamp' => $this->syncServerTime(),
-            'startTime' => $startTime,
-            'endTime' => $endTime
+            // 'startTime' => $startTime,
+            // 'endTime' => $endTime
         ];
         $symbol = $firstSymbol.$secondSymbol;
 
