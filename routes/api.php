@@ -11,6 +11,7 @@ use App\Http\Controllers\BinanceTest;
 
 // ============ binance spot ==============
 Route::get('/binance/tradespot/{startTime}/{endTime}/{firstSymbol}/{secondSymbol}/{apiKey}/{secretKey}', [Binance::class, 'myTrade']);
+Route::get('/binance/tradespottest/{firstSymbol}/{secondSymbol}/{apiKey}/{secretKey}', [Binance::class, 'myTradeTest']);
 // ============= binane spot end =================
 
 

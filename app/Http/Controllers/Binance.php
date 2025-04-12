@@ -105,6 +105,37 @@ public function myTrade($startTime, $endTime, $firstSymbol, $secondSymbol, $apiK
         return response()->json(['error' => $e->getMessage()], 500);
     }
 }
+public function myTradeTest($firstSymbol, $secondSymbol, $apiKey, $secretKey)
+{
+
+    try {
+        $api = new Spot([
+        'key' => $apiKey,
+        'secret' => $secretKey
+         ]);
+        $params = [
+            'timestamp' => $this->syncServerTime()
+            // ,
+            // 'startTime' => $startTime,
+            // 'endTime' => $endTime
+        ];
+        $symbol = $firstSymbol.$secondSymbol;
+
+        $response = $api->myTrades($symbol, $params);
+
+        // $balance = $this->getBalanceAtTime($apiKey, $secretKey, $startTime, $firstSymbol, $secondSymbol);
+
+        return response()->json([
+               "status" => true,
+               "data" => [
+                "trade" => $response,
+                // "balance" => $balance
+               ]
+        ], 200);
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
+}
 
 
 // =================================== get user balance================================
