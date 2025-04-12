@@ -146,7 +146,7 @@ public function getBalanceAtTime($apiKey, $secretKey, $timestamp, $firstSymbol, 
 
     // 1️⃣ Get account snapshot from the previous day
 
-    // $snapshot = $this->getAccountSnapshot($apiKey, $secretKey, $previousDayTimestamp);
+    $snapshot = $this->getAccountSnapshot($apiKey, $secretKey, $previousDayTimestamp);
 
     // $balances = $this->extractBalances($snapshot, [$secondSymbol, $firstSymbol]);
 
@@ -159,7 +159,7 @@ public function getBalanceAtTime($apiKey, $secretKey, $timestamp, $firstSymbol, 
 
     // $finalBalance = $this->calculateBalance($balances, $deposits, $withdrawals);
 
-    return $previousDayTimestamp;
+    return $snapshot;
 }
 
 private function getPreviousDayTimestamp($timestamp)
