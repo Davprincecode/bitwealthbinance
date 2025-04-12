@@ -105,7 +105,7 @@ public function myTrade($startTime, $endTime, $firstSymbol, $secondSymbol, $apiK
         return response()->json(['error' => $e->getMessage()], 500);
     }
 }
-public function myTradeTest($firstSymbol, $secondSymbol, $apiKey, $secretKey)
+public function myTradeTest($startTime, $endTime, $firstSymbol, $secondSymbol, $apiKey, $secretKey)
 {
 
     try {
@@ -115,9 +115,9 @@ public function myTradeTest($firstSymbol, $secondSymbol, $apiKey, $secretKey)
          ]);
         $params = [
             'timestamp' => $this->syncServerTime()
-            // ,
-            // 'startTime' => $startTime,
-            // 'endTime' => $endTime
+            ,
+            'startTime' => $startTime,
+            'endTime' => $endTime
         ];
         $symbol = $firstSymbol.$secondSymbol;
 
