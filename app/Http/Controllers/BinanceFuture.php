@@ -27,6 +27,7 @@ class BinanceFuture extends Controller
     {
         try {
         return response()->json($this->binanceService->getPositions($apiKey, $secretKey));
+
     } catch (\Exception $e) {
         return ['error' => $e->getMessage()];
     }

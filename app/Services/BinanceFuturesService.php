@@ -31,7 +31,7 @@ class BinanceFuturesService
         // $this->apiSecret = '38dc061581dfb14a693b61eaa4d637e1de0c98129635f2c672b5f993a6ec3d2b';
 
 
-        $this->baseUrl = "https://testnet.binancefuture.com";
+        $this->baseUrl = "https://fapi.binance.com";
     }
 
     /**
